@@ -1,24 +1,29 @@
 # Hypgen
 
-TODO: Write a gem description
+Hypgen is a tool for generating ISMOP experiments.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+1. Clone hypgen git repository `export GIT_SSL_NO_VERIFY=1 git clone git@dev.cyfronet.pl:ismop/hypgen.git`. Server certificate needs to be disabled since dice's gitlab  certificate signed by terena is not added to default Ubuntu trusted certs store.
+1. Enter `hypgen` directory
+1. Intall required gems `bundle install --deployment`
 
-    gem 'hypgen'
+## Running
 
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install hypgen
+```
+bundle exec puma
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+Create new experiment
+
+```
+curl -H "Content-Type: application/json" -d '{"experiment":{"profile_ids":[1,2,3], "start": "2012-04-23T18:25:43.511Z", "end": "2012-04-23T18:25:43.511Z"}}' http://localhost:9292/api/experiments
+```
+
+As a result new experiment will be created, new workflow with required dependencies
+will be started. Service will response `303` status on success with `Location` header poining to created experiment.
 
 ## Contributing
 
