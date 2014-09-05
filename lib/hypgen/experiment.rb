@@ -24,9 +24,10 @@ module Hypgen
 
     def exp_cli
       @exp_cli ||= Exp::Cli.new(
-        url: 'https://vph.cyfronet.pl'
-        verify: true,
-        token: 'FIXME')
+          url:    Hypgen.config.exp_url,
+          verify: Hypgen.config.exp_verify,
+          token:  Hypgen.config.exp_token
+        )
     end
 
     def run!
