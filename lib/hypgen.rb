@@ -8,8 +8,8 @@ module Hypgen
 
   module Api
     module V1
-      autoload :Main,       'api/v1/main'
-      autoload :Experiment, 'api/v1/experiment'
+      autoload :Main,       'hypgen/api/v1/main'
+      autoload :Experiment, 'hypgen/api/v1/experiment'
     end
   end
 
