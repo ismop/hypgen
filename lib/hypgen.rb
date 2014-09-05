@@ -26,3 +26,28 @@ end
 module Exp
   autoload :Cli,            'exp/cli'
 end
+
+module RestCli
+
+  def initialize(options = {})
+    @connection = options[:connection] || initialize_connection(options)
+  end
+
+  private
+
+  attr_reader :connection
+
+  def initialize_connection(options)
+    url    = options[:url]
+    verify = options[:verify]
+    token  = options[:token]
+
+    Faraday.new(url: url, ssl: {verify: verify}) do |faraday|
+      faraday.request :url_encoded
+      faraday.response :logger
+      faraday.adapter Faraday.default_adapter
+      faraday.headers['PRIVATE-TOKEN'] = token
+      faraday.headers['Content-Type'] = 'application/json'
+    end
+  end
+end

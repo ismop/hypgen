@@ -20,6 +20,18 @@ module Hypgen
       @config['exp']['verify']
     end
 
+    def dap_url
+      @config['dap']['url']
+    end
+
+    def dap_token
+      @config['dap']['token']
+    end
+
+    def dap_verify
+      @config['dap']['verify']
+    end
+
     private
 
     def default_config_path
@@ -30,7 +42,7 @@ module Hypgen
       if File.exists?(config_path)
         @config = YAML.load_file(config_path)
       else
-        @config = {exp: {}}
+        @config = { exp: {}, dap: {} }
       end
     end
   end

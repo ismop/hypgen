@@ -9,15 +9,19 @@ module Hypgen
     end
 
     def start!
-      @id = Dap::Cli.create_experiment(
+      @id = dap_cli.create_exp(
         @profile_ids, @start_time, @end_time)
 
-      @workflow = Workflow.new(@profile_ids, @start_time, @end_time)
-      setup     = Planner.new(@workflow).setup
+      begin
+        @workflow = Workflow.new(@profile_ids, @start_time, @end_time)
+        setup     = Planner.new(@workflow).setup
 
-      @set_id   = exp_cli.start_as(setup, importance_level: 45)
+        @set_id   = exp_cli.start_as(setup, importance_level: 45)
 
-      run!
+        run!
+      rescue Exception => e
+        dap_cli.update_exp(@id, { status: :error, error_message: e.message })
+      end
     end
 
     private
@@ -27,6 +31,14 @@ module Hypgen
           url:    Hypgen.config.exp_url,
           verify: Hypgen.config.exp_verify,
           token:  Hypgen.config.exp_token
+        )
+    end
+
+    def dap_cli
+      @dap_cli ||= Dap::Cli.new(
+          url:    Hypgen.config.dap_url,
+          verify: Hypgen.config.dap_verify,
+          token:  Hypgen.config.dap_token
         )
     end
 

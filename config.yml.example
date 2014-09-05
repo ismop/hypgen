@@ -2,3 +2,8 @@ exp:
   url: https://exp.moc.ismop.edu.pl
   token: FIXME (goto https://exp.moc.ismop.edu.pl/profile Credentials tab)
   verify: false
+
+dap:
+  url: https://dap.moc.ismop.edu.pl
+  token: FIXME (goto https://dap.moc.ismop.edu.pl/profile Credentials tab)
+  verify: false
