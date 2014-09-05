@@ -32,6 +32,14 @@ module Hypgen
       @config['dap']['verify']
     end
 
+    def username
+      @config['username']
+    end
+
+    def password
+      @config['password']
+    end
+
     private
 
     def default_config_path

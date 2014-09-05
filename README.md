@@ -30,8 +30,10 @@ bundle exec puma
 Create new experiment
 
 ```
-curl -H "Content-Type: application/json" -d '{"experiment":{"profile_ids":[1,2,3], "start": "2012-04-23T18:25:43.511Z", "end": "2012-04-23T18:25:43.511Z"}}' http://localhost:9292/api/experiments
+curl -H "Content-Type: application/json" -d '{"experiment":{"profile_ids":[1,2,3], "start": "2012-04-23T18:25:43.511Z", "end": "2012-04-23T18:25:43.511Z"}}' -u username:password http://localhost:9292/api/experiments
 ```
+
+Where `username` and `password` are eqals to values set in `config.yml`
 
 As a result new experiment will be created, new workflow with required dependencies
 will be started. Service will response `303` status on success with `Location` header poining to created experiment.

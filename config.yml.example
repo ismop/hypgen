@@ -1,3 +1,6 @@
+username: FIXME
+password: FIXME
+
 exp:
   url: https://exp.moc.ismop.edu.pl
   token: FIXME (goto https://exp.moc.ismop.edu.pl/profile Credentials tab)
