@@ -15,6 +15,7 @@ module Exp
             name: options[:name] || "HypGen appliance set #{Time.now}",
             priority: options[:priority] || 50,
             appliance_set_type: :workflow,
+            optimization_policy: :manual,
             appliances: requirements || []
           }
         }.to_json
