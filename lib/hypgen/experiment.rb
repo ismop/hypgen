@@ -15,12 +15,19 @@ module Hypgen
       @workflow = Workflow.new(@profile_ids, @start_time, @end_time)
       setup     = Planner.new(@workflow).setup
 
-      @set_id   = Exp::Cli.start_appliance_set(setup, importance_level: 45)
+      @set_id   = exp_cli.start_as(setup, importance_level: 45)
 
       run!
     end
 
     private
+
+    def exp_cli
+      @exp_cli ||= Exp::Cli.new(
+        url: 'https://vph.cyfronet.pl'
+        verify: true,
+        token: 'FIXME')
+    end
 
     def run!
       #TODO MP, BB: start workflow. After workflow finished appliance set
