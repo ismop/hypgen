@@ -40,7 +40,7 @@ will be started. Service will response `303` status on success with `Location` h
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/hypgen/fork )
+1. Fork it (https://gitlab.dev.cyfronet.pl/ismop/hypgen.git)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
