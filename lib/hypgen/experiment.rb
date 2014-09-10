@@ -14,13 +14,16 @@ module Hypgen
 
       begin
         @workflow = Workflow.new(@profile_ids, @start_time, @end_time)
-        setup     = Planner.new(@workflow).setup
+        setup     = Planner.new(@workflow.as_json).setup
 
         @set_id   = exp_cli.start_as(setup, importance_level: 45)
 
         run!
       rescue Exception => e
         dap_cli.update_exp(@id, { status: :error, error_message: e.message })
+        #some debug output
+        puts e.message
+        puts e.backtrace
       end
     end
 

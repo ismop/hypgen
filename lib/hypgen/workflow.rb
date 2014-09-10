@@ -1,3 +1,5 @@
+require 'json'
+
 module Hypgen
   class Workflow
     def initialize(profile_ids, start_time, end_time)
@@ -14,10 +16,23 @@ module Hypgen
       @external_dependencies ||= find_dependencies
     end
 
+    def params
+      @params ||= {
+          :sections => @profile_ids.collect { |id| { :id => id.to_s, :simdata => "simset0001"} },
+          :timeWindow => "24"
+      }
+    end
+
     private
 
     def generate_workflow
-      #TODO MP: Real workflow generation.
+      exec_string = Hypgen.config.node_location + " " + Hypgen.config.wfgen_script_location
+      puts "calling: #{exec_string} with params: #{params.to_json}"
+      IO.popen(exec_string, 'r+') do |pipe|
+        pipe.puts(params.to_json)
+        pipe.close_write
+        output = pipe.read
+      end
     end
 
     def find_dependencies

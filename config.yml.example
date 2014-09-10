@@ -1,6 +1,14 @@
 username: FIXME
 password: FIXME
 
+node_location: FIXME
+
+wfgen:
+  script_location: FIXME (wfgen script location) https://gitlab.dev.cyfronet.pl/balis/wfgen
+
+hyperflow:
+  script_location: FIXME (hyperflow script location) https://github.com/dice-cyfronet/hyperflow
+
 exp:
   url: https://exp.moc.ismop.edu.pl
   token: FIXME (goto https://exp.moc.ismop.edu.pl/profile Credentials tab)
