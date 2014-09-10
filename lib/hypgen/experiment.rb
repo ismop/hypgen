@@ -14,7 +14,7 @@ module Hypgen
 
       begin
         @workflow = Workflow.new(@profile_ids, @start_time, @end_time)
-        setup     = Planner.new(@workflow.as_json).setup
+        setup     = Planner.new(@workflow).setup
 
         @set_id   = exp_cli.start_as(setup, importance_level: 45)
 
