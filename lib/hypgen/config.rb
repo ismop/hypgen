@@ -40,6 +40,18 @@ module Hypgen
       @config['password']
     end
 
+    def node_location
+      @config['node_location']
+    end
+
+    def wfgen_script_location
+      @config['wfgen']['script_location']
+    end
+
+    def hyperflow_script_location
+      @config['hyperflow']['script_location']
+    end
+
     private
 
     def default_config_path
