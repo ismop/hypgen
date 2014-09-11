@@ -20,7 +20,7 @@ module Hypgen
 
         run!
       rescue Exception => e
-        dap_cli.update_exp(@id, { status: :error, error_message: e.message })
+        dap_cli.update_exp(@id, { status: :error, status_message: e.message })
         #some debug output
         puts e.message
         puts e.backtrace
