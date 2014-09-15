@@ -52,6 +52,14 @@ module Hypgen
       #             should be destroyed (use @set_id) and experiment status
       #             should be updated into finished (use @id).
       # getworkflow by calling @workflow.as_json_with_set_id
+      exec_string = Hypgen.config.node_location + " " + Hypgen.config.hyperflow_script_location
+      puts "not calling: #{exec_string}"
+      # IO.popen(exec_string, 'r+') do |pipe|
+        # pipe.puts(params.to_json)
+        # pipe.close_write
+        # output = pipe.read
+      # end
+
       puts "3. starting generated workflow"
     end
   end

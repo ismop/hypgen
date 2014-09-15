@@ -3,7 +3,7 @@ require 'json'
 module Hypgen
   class Workflow
     def initialize(experiment_id, profile_ids, start_time, end_time)
-      @id = experiment_id
+      @experimentId = experiment_id
       @profile_ids = profile_ids
       @start_time = start_time
       @end_time = end_time
@@ -19,13 +19,15 @@ module Hypgen
 
     def params
       @params ||= {
-          :sections => @profile_ids.collect { |id| { :id => id.to_s, :simdata => "simset0001"} },
-          :timeWindow => "24"
+          :sections => @profile_ids.collect { |section_id| { :id => section_id.to_s } },
+          :startDate => @start_time,
+          :endDate => @end_time,
+          :experimentId => @experimentId
       }
     end
 
-    def set_set_id(as_id)
-      @set_id = as_id
+    def set_set_id(application_set_id)
+      @set_id = application_set_id
     end
 
     def as_json_with_set_id
@@ -49,7 +51,7 @@ module Hypgen
     def find_dependencies
       [
           #init_conf_tmp_id 7: worker_conf
-        { init_conf_tmp_id: 7, params: { id: @id, dap_token: Hypgen.config.dap_token } },
+        { init_conf_tmp_id: 7, params: { experimentId: @experimentId, dap_token: Hypgen.config.dap_token } },
       ]
     end
   end
