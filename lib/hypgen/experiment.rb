@@ -18,6 +18,8 @@ module Hypgen
 
         @set_id   = exp_cli.start_as(setup, importance_level: 45)
 
+        @workflow.set_set_id(@set_id)
+
         run!
       rescue Exception => e
         #some debug output
@@ -49,6 +51,7 @@ module Hypgen
       #TODO MP, BB: start workflow. After workflow finished appliance set call hyperflow
       #             should be destroyed (use @set_id) and experiment status
       #             should be updated into finished (use @id).
+      # getworkflow by calling @workflow.as_json_with_set_id
       puts "3. starting generated workflow"
     end
   end

@@ -24,6 +24,16 @@ module Hypgen
       }
     end
 
+    def set_set_id(as_id)
+      @set_id = as_id
+    end
+
+    def as_json_with_set_id
+      #use only in last step when generating wf for HF!
+      wf = @workflow_json || generate_workflow
+      wf.sub("$$AS_ID$$", @set_id)
+    end
+
     private
 
     def generate_workflow
