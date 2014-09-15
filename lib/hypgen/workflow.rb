@@ -22,7 +22,8 @@ module Hypgen
           :sections => @profile_ids.collect { |section_id| { :id => section_id.to_s } },
           :startDate => @start_time,
           :endDate => @end_time,
-          :experimentId => @experimentId
+          :experimentId => @experimentId,
+          :dapToken => Hypgen.config.dap_token
       }
     end
 
