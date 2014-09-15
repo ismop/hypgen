@@ -13,17 +13,17 @@ module Hypgen
         @profile_ids, @start_time, @end_time)
 
       begin
-        @workflow = Workflow.new(@profile_ids, @start_time, @end_time)
+        @workflow = Workflow.new(@id, @profile_ids, @start_time, @end_time)
         setup     = Planner.new(@workflow).setup
 
         @set_id   = exp_cli.start_as(setup, importance_level: 45)
 
         run!
       rescue Exception => e
-        dap_cli.update_exp(@id, { status: :error, status_message: e.message })
         #some debug output
         puts e.message
         puts e.backtrace
+        dap_cli.update_exp(@id, { status: :error, status_message: e.message })
       end
     end
 
@@ -46,7 +46,7 @@ module Hypgen
     end
 
     def run!
-      #TODO MP, BB: start workflow. After workflow finished appliance set
+      #TODO MP, BB: start workflow. After workflow finished appliance set call hyperflow
       #             should be destroyed (use @set_id) and experiment status
       #             should be updated into finished (use @id).
       puts "3. starting generated workflow"

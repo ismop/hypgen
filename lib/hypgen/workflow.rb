@@ -2,7 +2,8 @@ require 'json'
 
 module Hypgen
   class Workflow
-    def initialize(profile_ids, start_time, end_time)
+    def initialize(experiment_id, profile_ids, start_time, end_time)
+      @id = experiment_id
       @profile_ids = profile_ids
       @start_time = start_time
       @end_time = end_time
@@ -36,11 +37,9 @@ module Hypgen
     end
 
     def find_dependencies
-      # TODO MP: At the beginning this dependencies can be hardcoded
-      #          Example created above will start VPH WebDRS
       [
-        { init_conf_tmp_id: 614, params: { channel: 'exp1' } },
-        #...
+          #init_conf_tmp_id 7: worker_conf
+        { init_conf_tmp_id: 7, params: { id: @id, dap_token: Hypgen.config.dap_token } },
       ]
     end
   end
