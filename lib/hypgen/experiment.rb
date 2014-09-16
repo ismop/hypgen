@@ -51,16 +51,20 @@ module Hypgen
       #TODO MP, BB: start workflow. After workflow finished appliance set call hyperflow
       #             should be destroyed (use @set_id) and experiment status
       #             should be updated into finished (use @id).
+
+      #TODO: this should fork to background
+
       # getworkflow by calling @workflow.as_json_with_set_id
       exec_string = Hypgen.config.node_location + " " + Hypgen.config.hyperflow_script_location
-      puts "not calling: #{exec_string}"
-      # IO.popen(exec_string, 'r+') do |pipe|
-        # pipe.puts(params.to_json)
-        # pipe.close_write
-        # output = pipe.read
-      # end
+      puts "not calling: #{exec_string} with generated workflow"
+      IO.popen(exec_string, 'r+') do |pipe|
+        pipe.puts(@workflow.as_json_with_set_id)
+        pipe.close_write
+        output = pipe.read
+      end
 
       puts "3. starting generated workflow"
+      #should this return exp id?
     end
   end
 end
