@@ -1,0 +1,160 @@
+{
+    "name": "ISMOP",
+    "processes": [
+        {
+            "name": "ComputeScenarioRanks0001",
+            "function": "computeScenarioRanks",
+            "type": "dataflow",
+            "ins": [
+                "SimulatedScenarios-simset0001",
+                "RealData0001"
+            ],
+            "outs": [
+                "Ranks"
+            ]
+        },
+        {
+            "name": "ComputeScenarioRanks0002",
+            "function": "computeScenarioRanks",
+            "type": "dataflow",
+            "ins": [
+                "SimulatedScenarios-simset0001",
+                "RealData0002"
+            ],
+            "outs": [
+                "Ranks"
+            ]
+        },
+        {
+            "name": "ComputeScenarioRanks0004",
+            "function": "computeScenarioRanks",
+            "type": "dataflow",
+            "ins": [
+                "SimulatedScenarios-simset0001",
+                "RealData0004"
+            ],
+            "outs": [
+                "Ranks"
+            ]
+        },
+        {
+            "name": "ComputeScenarioRanks0006",
+            "function": "computeScenarioRanks",
+            "type": "dataflow",
+            "ins": [
+                "SimulatedScenarios-simset0002",
+                "RealData0006"
+            ],
+            "outs": [
+                "Ranks"
+            ]
+        },
+        {
+            "name": "ComputeScenarioRanks0009",
+            "function": "computeScenarioRanks",
+            "type": "dataflow",
+            "ins": [
+                "SimulatedScenarios-simset0003",
+                "RealData0009"
+            ],
+            "outs": [
+                "Ranks"
+            ]
+        },
+        {
+            "name": "ComputeThreatLevel",
+            "function": "computeThreatLevel",
+            "type": "dataflow",
+            "parlevel": 5,
+            "ins": [
+                "Ranks"
+            ],
+            "outs": [
+                "ThreatLevelAndRanks"
+            ]
+        },
+        {
+            "name": "SaveResults",
+            "function": "saveResults",
+            "type": "dataflow",
+            "ins": [
+                "ThreatLevelAndRanks"
+            ],
+            "outs": []
+        }
+    ],
+    "signals": [
+        {
+            "name": "Ranks"
+        },
+        {
+            "name": "RealData0001",
+            "data": [
+                {
+                    "uri": "http://dap.moc.ismop.edu.pl/data?id=0001;from=2014-09-14T10:20:13.530Z"
+                }
+            ]
+        },
+        {
+            "name": "SimulatedScenarios-simset0001",
+            "data": [
+                {
+                    "uri": "file:///mnt/bigstorage/ismop/scenarios/simset0001.dat"
+                }
+            ]
+        },
+        {
+            "name": "RealData0002",
+            "data": [
+                {
+                    "uri": "http://dap.moc.ismop.edu.pl/data?id=0002;from=2014-09-14T10:20:13.531Z"
+                }
+            ]
+        },
+        {
+            "name": "RealData0004",
+            "data": [
+                {
+                    "uri": "http://dap.moc.ismop.edu.pl/data?id=0004;from=2014-09-14T10:20:13.531Z"
+                }
+            ]
+        },
+        {
+            "name": "RealData0006",
+            "data": [
+                {
+                    "uri": "http://dap.moc.ismop.edu.pl/data?id=0006;from=2014-09-14T10:20:13.531Z"
+                }
+            ]
+        },
+        {
+            "name": "SimulatedScenarios-simset0002",
+            "data": [
+                {
+                    "uri": "file:///mnt/bigstorage/ismop/scenarios/simset0002.dat"
+                }
+            ]
+        },
+        {
+            "name": "RealData0009",
+            "data": [
+                {
+                    "uri": "http://dap.moc.ismop.edu.pl/data?id=0009;from=2014-09-14T10:20:13.531Z"
+                }
+            ]
+        },
+        {
+            "name": "SimulatedScenarios-simset0003",
+            "data": [
+                {
+                    "uri": "file:///mnt/bigstorage/ismop/scenarios/simset0003.dat"
+                }
+            ]
+        },
+        {
+            "name": "ThreatLevelAndRanks"
+        }
+    ],
+    "ins": [],
+    "outs": []
+}
