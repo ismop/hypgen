@@ -55,15 +55,15 @@ module Hypgen
       #TODO: this should fork to background
 
       # getworkflow by calling @workflow.as_json_with_set_id
+      puts "3. starting generated workflow"
       exec_string = Hypgen.config.node_location + " " + Hypgen.config.hyperflow_script_location
-      puts "not calling: #{exec_string} with generated workflow"
+      puts "calling: #{exec_string} with generated workflow"
       IO.popen(exec_string, 'r+') do |pipe|
         pipe.puts(@workflow.as_json_with_set_id)
         pipe.close_write
         output = pipe.read
       end
 
-      puts "3. starting generated workflow"
       #should this return exp id?
     end
   end
