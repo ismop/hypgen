@@ -34,7 +34,7 @@ module Hypgen
     def as_json_with_set_id
       #use only in last step when generating wf for HF!
       wf = @workflow_json || generate_workflow
-      wf.sub("$$AS_ID$$", @set_id)
+      wf.sub("$$AS_ID$$", @set_id.to_s)
     end
 
     private
