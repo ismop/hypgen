@@ -62,6 +62,8 @@ module Hypgen
         pipe.puts(@workflow.as_json_with_set_id)
         pipe.close_write
         output = pipe.read
+
+        puts "Workflow execution output: #{output}"
       end
 
       #should this return exp id?
