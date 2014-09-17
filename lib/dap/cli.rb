@@ -5,13 +5,14 @@ module Dap
   class Cli
     include RestCli
 
-    def create_exp(profile_ids, start_time, end_time)
+    def create_exp(name, profile_ids, start_time, end_time)
       puts "1. creating new experiment for #{profile_ids} profiles with period #{start_time} - #{end_time}"
 
       response = connection.post do |req|
         req.url '/api/v1/experiments'
         req.body = {
           experiment: {
+            name: name,
             start_date: start_time,
             end_date: end_time,
             profile_ids: profile_ids,
