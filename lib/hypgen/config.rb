@@ -53,7 +53,7 @@ module Hypgen
     end
 
     def config_template_id
-      @config['worker_config_template_id'].to_i
+      @config['worker_config_template_id']
     end
 
     private
