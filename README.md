@@ -30,7 +30,7 @@ bundle exec puma
 Create new experiment
 
 ```
-curl -H "Content-Type: application/json" -d '{"experiment":{"profile_ids":[1,2,3], "start": "2012-04-23T18:25:43.511Z", "end": "2012-04-23T18:25:43.511Z"}}' -u username:password http://localhost:9292/api/experiments
+curl -H "Content-Type: application/json" -d '{"experiment":{"profile_ids":[1,2,3], "start": "2014-09-17 11:29:03 +0200", "end": ""2014-09-17 12:29:03 +0200}}' -u username:password http://localhost:9292/api/experiments
 ```
 
 Where `username` and `password` are eqals to values set in `config.yml`
