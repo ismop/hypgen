@@ -15,6 +15,7 @@ describe Dap::Cli do
     stubs.post('api/v1/experiments') do |env|
       exp_request = JSON.parse(env.body)['experiment']
 
+      expect(exp_request['name']).to eq 'exp'
       expect(exp_request['start_date']).to eq 'start_d'
       expect(exp_request['end_date']).to eq 'end_d'
       expect(exp_request['profile_ids']).to eq [1, 2, 3]
@@ -23,7 +24,7 @@ describe Dap::Cli do
       [201, {}, '{"experiment":{"id": 123}}']
     end
 
-    expect(subject.create_exp([1, 2, 3], 'start_d', 'end_d')).to eq 123
+    expect(subject.create_exp('exp', [1, 2, 3], 'start_d', 'end_d')).to eq 123
   end
 
   it 'throws exception when unable to create experiment' do
@@ -31,7 +32,7 @@ describe Dap::Cli do
       [400, {}, '{"message": "appliance init conf not found"}']
     end
 
-    expect { subject.create_exp([1] ,'s', 'e') }.to raise_error(Dap::ExpCreationError)
+    expect { subject.create_exp('exp', [1] ,'s', 'e') }.to raise_error(Dap::ExpCreationError)
   end
 
   it 'updates experiment fields' do

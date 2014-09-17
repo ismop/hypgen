@@ -10,6 +10,7 @@ module Hypgen
 
           params do
             requires :experiment, type: Hash  do
+              requires :name, type: String
               requires :profile_ids, type: Array
               requires :start, type: Time
               requires :end, type: Time
@@ -17,6 +18,7 @@ module Hypgen
           end
           post do
             exp = Hypgen::Experiment.new(
+              params[:experiment][:name],
               params[:experiment][:profile_ids],
               params[:experiment][:start],
               params[:experiment][:end])

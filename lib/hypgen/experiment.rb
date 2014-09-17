@@ -2,7 +2,8 @@ module Hypgen
   class Experiment
     attr_reader :id
 
-    def initialize(profile_ids, start_time, end_time)
+    def initialize(name, profile_ids, start_time, end_time)
+      @name = name
       @profile_ids = profile_ids
       @start_time = start_time
       @end_time = end_time
@@ -10,7 +11,7 @@ module Hypgen
 
     def start!
       @id = dap_cli.create_exp(
-        @profile_ids, @start_time, @end_time)
+        @name, @profile_ids, @start_time, @end_time)
 
       begin
         @workflow = Workflow.new(@id, @profile_ids, @start_time, @end_time)
