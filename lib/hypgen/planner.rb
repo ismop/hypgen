@@ -35,6 +35,8 @@ module Hypgen
 
       @workflow.external_dependencies.map do |appl|
         {
+          configuration_template_id: appl[:configuration_template_id],
+          params: appl[:params],
           vms: vms
         }
       end
