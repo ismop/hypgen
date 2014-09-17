@@ -11,8 +11,8 @@ module Hypgen
           params do
             requires :experiment, type: Hash  do
               requires :profile_ids, type: Array
-              requires :start, type: Date
-              requires :end, type: Date
+              requires :start, type: Time
+              requires :end, type: Time
             end
           end
           post do
