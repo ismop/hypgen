@@ -29,7 +29,7 @@ module Hypgen
             {
               meta: {
                 url: "https://dap.moc.ismop.edu.pl/api/v1/experiments/#{exp.id}"
-              }
+              },
               experiment: {
                 id: exp.id
               }
