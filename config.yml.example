@@ -3,6 +3,8 @@ password: FIXME
 
 node_location: FIXME
 
+worker_config_template_id: FIXME
+
 wfgen:
   script_location: FIXME (wfgen script location) https://gitlab.dev.cyfronet.pl/ismop/wfgen
 

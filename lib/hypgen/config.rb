@@ -52,6 +52,10 @@ module Hypgen
       @config['hyperflow']['script_location']
     end
 
+    def config_template_id
+      @config['worker_config_template_id'].to_i
+    end
+
     private
 
     def default_config_path

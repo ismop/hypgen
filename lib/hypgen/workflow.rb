@@ -52,7 +52,7 @@ module Hypgen
     def find_dependencies
       [
           #init_conf_tmp_id 7: worker_conf
-        { configuration_template_id: 7, params: { experimentId: @experimentId, dap_token: Hypgen.config.dap_token } },
+        { configuration_template_id: Hypgen.config.config_template_id, params: { experimentId: @experimentId, dap_token: Hypgen.config.dap_token } },
       ]
     end
   end
