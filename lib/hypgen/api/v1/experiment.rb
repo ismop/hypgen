@@ -25,7 +25,15 @@ module Hypgen
 
             exp.start!
 
-            redirect "https://dap.moc.ismop.edu.pl/api/v1/experiments/#{exp.id}"
+            status 201
+            {
+              meta: {
+                url: "https://dap.moc.ismop.edu.pl/api/v1/experiments/#{exp.id}"
+              }
+              experiment: {
+                id: exp.id
+              }
+            }
           end
         end
       end
