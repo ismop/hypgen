@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Hypgen</title>
+
+  <style type="text/css">
+    body {
+      color: #666;
+      text-align: center;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      sans-serif;
+      margin:0;
+      width: 800px;
+      margin: auto;
+      font-size: 14px;
+    }
+    h1 {
+      font-size: 56px;
+      line-height: 100px;
+      font-weight: normal;
+      color: #456;
+    }
+
+    h3 {
+      color: #456;
+      font-size: 20px;
+      font-weight: normal;
+      line-height: 28px;
+    }
+
+    hr {
+      margin: 18px 0;
+      border: 0;
+      border-top: 1px solid #EEE;
+      border-bottom: 1px solid white;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Hypgen</h1>
+  <h3>To start new ISMOP experiment execute following command</h3>
+  <hr/>
+  <pre>
+curl -k -H "Content-Type: application/json" \
+-d '{"experiment":{"profile_ids":[1,2,3], "start": "2012-04-23T18:25:43.511Z", "end": "2012-04-23T18:25:43.511Z"}}' \
+-u username:password https://hypgen.moc.ismop.edu.pl/api/experiments
+  </pre>
+</body>
+</html>
