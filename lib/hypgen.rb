@@ -1,4 +1,6 @@
 require "hypgen/version"
+# use resolv-replace for DNS lookups
+require 'resolv-replace'
 
 module Hypgen
 
