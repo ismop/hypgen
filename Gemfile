@@ -1,12 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'grape'
-gem 'puma'
-gem 'faraday'
-gem 'recursive-open-struct'
-
+# Specify your gem's dependencies in hypgen.gemspec
+gemspec
 
 group :development do
   gem 'rspec'
   gem 'guard-rspec', require: false
 end
+

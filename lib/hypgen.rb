@@ -1,11 +1,27 @@
-require "hypgen/version"
 # use resolv-replace for DNS lookups
 require 'resolv-replace'
 
 module Hypgen
+  extend self
 
-  def self.config
-    @config ||= Config.new
+  def config
+    @config ||= Config.new(ARGV[0] || 'config.yml')
+  end
+
+  def exp
+    @exp_cli ||= Exp::Cli.new(
+        url:    Hypgen.config.exp_url,
+        verify: Hypgen.config.exp_verify,
+        token:  Hypgen.config.exp_token
+      )
+  end
+
+  def dap
+    @dap_cli ||= Dap::Cli.new(
+        url:    Hypgen.config.dap_url,
+        verify: Hypgen.config.dap_verify,
+        token:  Hypgen.config.dap_token
+      )
   end
 
   module Api
@@ -15,6 +31,7 @@ module Hypgen
     end
   end
 
+  autoload :Version,        'hypgen/version'
   autoload :Config,         'hypgen/config'
   autoload :Experiment,     'hypgen/experiment'
   autoload :Workflow,       'hypgen/workflow'
@@ -28,6 +45,8 @@ end
 module Exp
   autoload :Cli,            'exp/cli'
 end
+
+require 'hypgen/worker'
 
 module RestCli
 

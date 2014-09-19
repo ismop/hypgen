@@ -37,6 +37,19 @@ module Hypgen
       wf.sub("$$AS_ID$$", @set_id.to_s)
     end
 
+    def run!
+      puts "3. starting generated workflow"
+      exec_string = Hypgen.config.node_location + " " + Hypgen.config.hyperflow_script_location
+      puts "calling: #{exec_string} with generated workflow"
+      IO.popen(exec_string, 'r+') do |pipe|
+        pipe.puts(as_json_with_set_id)
+        pipe.close_write
+        output = pipe.read
+
+        puts "Workflow execution output: #{output}"
+      end
+    end
+
     private
 
     def generate_workflow

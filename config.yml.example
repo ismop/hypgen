@@ -20,3 +20,7 @@ dap:
   url: https://dap.moc.ismop.edu.pl
   token: FIXME (goto https://dap.moc.ismop.edu.pl/profile Credentials tab)
   verify: false
+
+worker:
+#  redis_url: redis://localhost:6379
+#  namespace: hypgen

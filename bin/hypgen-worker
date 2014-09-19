@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+
+root_path = File.expand_path(File.join(File.dirname(__FILE__), '..'))
+runner_path = File.join(root_path, 'lib', 'hypgen.rb')
+config_path = 'config.yml'
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: hypgen-worker [options]"
+
+  opts.on("-c", "--configuration PATH", "Yaml worker configuration path") do |v|
+    config_path = v
+  end
+
+  opts.on_tail("-h", "--help", "Show this message") do
+    puts opts
+    exit
+  end
+end.parse!
+
+system "sidekiq -q experiment -r #{runner_path} #{config_path}"

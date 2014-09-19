@@ -1,11 +1,9 @@
 require 'yaml'
 
-ROOT_PATH = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
-
 module Hypgen
   class Config
-    def initialize(path = nil)
-      load_config(path || default_config_path)
+    def initialize(path)
+      load_config(path)
     end
 
     def exp_url
@@ -56,17 +54,21 @@ module Hypgen
       @config['worker_config_template_id']
     end
 
-    private
-
-    def default_config_path
-      File.join(ROOT_PATH, 'config.yml')
+    def namespace
+      @config['worker']['namespace'] || 'hypgen'
     end
+
+    def redis_url
+      @config['worker']['redis_url'] || 'redis://localhost:6379'
+    end
+
+    private
 
     def load_config(config_path)
       if File.exists?(config_path)
         @config = YAML.load_file(config_path)
       else
-        @config = { exp: {}, dap: {} }
+        @config = { exp: {}, dap: {}, worker: {}}
       end
     end
   end
