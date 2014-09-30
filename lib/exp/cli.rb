@@ -25,6 +25,12 @@ module Exp
 
       JSON.parse(response.body)['appliance_set']['id']
     end
+
+    def stop_as(set_id)
+      response = connection.delete do |req|
+        req.url "/api/v1/appliance_sets/#{set_id}"
+      end
+    end
   end
 
   class AsCreationError < Exception

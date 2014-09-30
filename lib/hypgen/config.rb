@@ -68,7 +68,7 @@ module Hypgen
       if File.exists?(config_path)
         @config = YAML.load_file(config_path)
       else
-        @config = { exp: {}, dap: {}, worker: {}}
+        @config = { 'exp' => {}, 'dap' => {}, 'worker' => {}}
       end
     end
   end

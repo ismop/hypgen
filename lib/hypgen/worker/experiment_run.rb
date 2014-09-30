@@ -19,6 +19,8 @@ module Hypgen
         puts e.backtrace
 
         Hypgen.dap.update_exp(exp_id, { status: :error, status_message: e.message })
+      ensure
+        Hypgen.exp.stop_as(set_id)
       end
     end
   end

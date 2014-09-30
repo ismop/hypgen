@@ -35,4 +35,14 @@ describe Exp::Cli do
 
     expect { subject.start_as([]) }.to raise_error(Exp::AsCreationError)
   end
+
+  it 'stops appliance set' do
+    stubs.delete('api/v1/appliance_sets/123') do |env|
+      [200, {}, '']
+    end
+
+    subject.stop_as(123)
+
+    stubs.verify_stubbed_calls
+  end
 end
