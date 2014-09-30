@@ -34,4 +34,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'grape'
   spec.add_dependency 'puma'
   spec.add_dependency 'recursive-open-struct'
+  spec.add_dependency 'rack-cors'
 end

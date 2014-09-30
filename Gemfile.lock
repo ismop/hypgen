@@ -5,13 +5,14 @@ PATH
       faraday
       grape
       puma
+      rack-cors
       recursive-open-struct
       sidekiq
 
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (4.1.5)
+    activesupport (4.1.6)
       i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
@@ -78,6 +79,7 @@ GEM
     rack (1.5.2)
     rack-accept (0.4.5)
       rack (>= 0.4)
+    rack-cors (0.2.9)
     rack-mount (0.8.3)
       rack (>= 1.0.0)
     rake (10.3.2)
