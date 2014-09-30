@@ -6,7 +6,7 @@ require 'rack/cors'
 
 use Rack::Cors do
   allow do
-    origins 'localhost', 'ui.moc.ismop.edu.pl'
+    origins '*'
     resource '*', :headers => :any, :methods => [:get, :post, :put, :delete, :options]
   end
 end
