@@ -68,7 +68,6 @@ module RestCli
       faraday.response :logger
       faraday.adapter Faraday.default_adapter
       faraday.headers['PRIVATE-TOKEN'] = token
-      faraday.headers['Content-Type'] = 'application/json'
     end
   end
 end

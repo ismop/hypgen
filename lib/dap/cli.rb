@@ -10,6 +10,7 @@ module Dap
 
       response = connection.post do |req|
         req.url '/api/v1/experiments'
+        req.headers['Content-Type'] = 'application/json'
         req.body = {
           experiment: {
             name: name,
@@ -31,6 +32,7 @@ module Dap
 
       response = connection.put do |req|
         req.url "/api/v1/experiments/#{exp_id}"
+        req.headers['Content-Type'] = 'application/json'
         req.body = { experiment: updated_fields }.to_json
       end
 

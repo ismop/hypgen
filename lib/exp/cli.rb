@@ -10,6 +10,7 @@ module Exp
 
       response = connection.post do |req|
         req.url '/api/v1/appliance_sets'
+        req.headers['Content-Type'] = 'application/json'
         req.body = {
           appliance_set: {
             name: options[:name] || "HypGen appliance set #{Time.now}",
