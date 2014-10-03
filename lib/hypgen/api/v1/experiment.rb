@@ -12,16 +12,16 @@ module Hypgen
             requires :experiment, type: Hash  do
               requires :name, type: String
               requires :profile_ids, type: Array
-              requires :start, type: Time
-              requires :end, type: Time
+              requires :start_date, type: Time
+              requires :end_date, type: Time
             end
           end
           post do
             exp = Hypgen::Experiment.new(
               params[:experiment][:name],
               params[:experiment][:profile_ids],
-              params[:experiment][:start],
-              params[:experiment][:end])
+              params[:experiment][:start_date],
+              params[:experiment][:end_date])
 
             exp.start!
 
