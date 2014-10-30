@@ -4,7 +4,7 @@ Hypgen is a tool for generating ISMOP experiments.
 
 ## Installation
 
-1. Clone hypgen git repository `export GIT_SSL_NO_VERIFY=1 git clone git@dev.cyfronet.pl:ismop/hypgen.git`. Server certificate needs to be disabled since dice's gitlab  certificate signed by terena is not added to default Ubuntu trusted certs store.
+1. Clone hypgen git repository `git clone https://github.com/ismop/hypgen.git`. Server certificate needs to be disabled since dice's gitlab  certificate signed by terena is not added to default Ubuntu trusted certs store.
 1. Enter `hypgen` directory
 1. Intall required gems `bundle install --deployment`
 1. Install redis `sudo apt-get install redis-server`
