@@ -1,4 +1,4 @@
-# Hypgen
+# Hypgen [![Build Status](https://travis-ci.org/ismop/hypgen.svg)](https://travis-ci.org/ismop/hypgen) [![Code Climate](https://codeclimate.com/github/ismop/hypgen/badges/gpa.svg)](https://codeclimate.com/github/ismop/hypgen) [![Test Coverage](https://codeclimate.com/github/ismop/hypgen/badges/coverage.svg)](https://codeclimate.com/github/ismop/hypgen) [![Dependency Status](https://gemnasium.com/ismop/hypgen.svg)](https://gemnasium.com/ismop/hypgen)
 
 Hypgen is a tool for generating ISMOP experiments.
 

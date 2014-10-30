@@ -1,0 +1,11 @@
+language: ruby
+
+rvm:
+  - 2.1.1
+
+addons:
+  code_climate:
+    repo_token:
+      secret: PcELOOKricWCW1V3mEFWbqRRdLo3zJlla6BrCHae9hu8p9Iyubie04OP2yAcHmyWjnPV/GVlOrK28bUM97EBxGA9TvTk9JOrnPR/UaJKK6UtatZB8BuxGpF1a6bVfbLTIfbh1rJTrtw2ZAzW3a4ijhhsHzU5pXEbahqaYek9X6c=
+
+script: bundle exec rspec

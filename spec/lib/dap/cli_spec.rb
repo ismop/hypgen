@@ -1,4 +1,4 @@
-require 'hypgen'
+require 'spec_helper'
 
 describe Dap::Cli do
 
