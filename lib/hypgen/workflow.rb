@@ -64,7 +64,7 @@ module Hypgen
 
     def find_dependencies
       [
-        { configuration_template_id: Hypgen.config.config_template_id, params: { experiment_id: @experimentId, dap_token: Hypgen.config.dap_token } },
+        { configuration_template_id: Hypgen.config.config_template_id, params: { experiment_id: @experimentId, dap_token: Hypgen.config.dap_token, rabbitmq_location: Hypgen.config.rabbitmq_location } },
       ]
     end
   end

@@ -54,6 +54,10 @@ module Hypgen
       @config['worker_config_template_id']
     end
 
+    def rabbitmq_locaton
+      @config['rabbitmq_locaton']
+    end
+
     def namespace
       @config['worker']['namespace'] || 'hypgen'
     end
