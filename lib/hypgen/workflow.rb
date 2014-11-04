@@ -2,11 +2,12 @@ require 'json'
 
 module Hypgen
   class Workflow
-    def initialize(experiment_id, profile_ids, start_time, end_time)
+    def initialize(experiment_id, profile_ids, rabbitmq_location, start_time, end_time)
       @experimentId = experiment_id
       @profile_ids = profile_ids
       @start_time = start_time
       @end_time = end_time
+      @rabbitmq_location = rabbitmq_location
     end
 
     def as_json
@@ -64,7 +65,7 @@ module Hypgen
 
     def find_dependencies
       [
-        { configuration_template_id: Hypgen.config.config_template_id, params: { experiment_id: @experimentId, dap_token: Hypgen.config.dap_token, rabbitmq_location: Hypgen.config.rabbitmq_location } },
+        { configuration_template_id: Hypgen.config.config_template_id, params: { experiment_id: @experimentId, dap_token: Hypgen.config.dap_token, rabbitmq_location: @rabbitmq_location } },
       ]
     end
   end

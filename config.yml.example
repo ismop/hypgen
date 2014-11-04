@@ -5,7 +5,7 @@ node_location: FIXME
 
 worker_config_template_id: FIXME
 
-rabbitmq_locaton: FIXME
+rabbitmq_location: FIXME
 
 wfgen:
   script_location: FIXME (wfgen script location) https://gitlab.dev.cyfronet.pl/ismop/wfgen
