@@ -8,7 +8,7 @@ Hypgen is a tool for generating ISMOP experiments.
 1. Enter `hypgen` directory
 1. Intall required gems `bundle install --deployment`
 1. Install redis `sudo apt-get install redis-server`
-1. install foreman `bundle install foreman`
+1. install foreman `gem install foreman`
 1. Create configuration file:
 
 ```
@@ -32,11 +32,14 @@ foreman start
 To start only web frontend type:
 
 ```
+export HFLOW_PATH=/path/to/hyperflow/
+```
+
+```
 foreman start web
 # or
 # bundle exec puma
 ```
-
 
 To start only worker type:
 
@@ -51,7 +54,8 @@ foreman start worker
 Create new experiment
 
 ```
-curl -k -H "Content-Type: application/json" -d '{"experiment":{"name": "exp name", "profile_ids":[1,2,3], "start_date": "2012-04-23 18:25:43.511", "end_date": "2012-04-23 18:25:43.511"}}' -u username:password http://localhost:9292/api/experiments
+curl -k -H "Content-Type: application/json" -d '{"experiment":{"name": "exp name", "profile_ids":[1,2], "start_date": "2014-11-21T09:45:42.025Z
+", "end_date": "2014-11-22T09:45:42.025Z"}}' -u username:password http://localhost:9292/api/experiments
 ```
 
 Where `username` and `password` are eqals to values set in `config.yml`
