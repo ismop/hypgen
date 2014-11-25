@@ -15,8 +15,9 @@ describe Hypgen::Planner do
     planner = Hypgen::Planner.new(workflow)
     setup     = planner.setup
 
-    puts setup
+    puts setup[0][:vms]
 
-    true.should == true
+    expect(setup[0][:vms].count).to eq(3)
+
   end
 end

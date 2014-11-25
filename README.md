@@ -63,6 +63,12 @@ Where `username` and `password` are eqals to values set in `config.yml`
 As a result new experiment will be created, new workflow with required dependencies
 will be started. Service will response `303` status on success with `Location` header poining to created experiment.
 
+## Running tests
+
+```
+bundle exec rspec
+```
+
 ## Contributing
 
 1. Fork it (https://gitlab.dev.cyfronet.pl/ismop/hypgen.git)
