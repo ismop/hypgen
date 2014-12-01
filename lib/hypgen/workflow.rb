@@ -24,7 +24,8 @@ module Hypgen
           :startDate => @start_time,
           :endDate => @end_time,
           :experimentId => @experimentId,
-          :dapToken => Hypgen.config.dap_token
+          :dapToken => Hypgen.config.dap_token,
+          :dapLocation => Hypgen.config.dap_url
       }
     end
 
