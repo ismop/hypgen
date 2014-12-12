@@ -2,12 +2,15 @@ require 'json'
 
 module Hypgen
   class Workflow
-    def initialize(experiment_id, profile_ids, rabbitmq_location, start_time, end_time)
+    attr_accessor :deadline
+
+    def initialize(experiment_id, profile_ids, rabbitmq_location, start_time, end_time, deadline)
       @experimentId = experiment_id
       @profile_ids = profile_ids
       @start_time = start_time
       @end_time = end_time
       @rabbitmq_location = rabbitmq_location
+      @deadline = deadline # in seconds
     end
 
     def as_json

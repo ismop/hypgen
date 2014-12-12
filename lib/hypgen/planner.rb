@@ -6,8 +6,7 @@ module Hypgen
 
     def initialize(workflow)
       @workflow = workflow
-      # FIXME the deadline should be given in parameters
-      @deadline = 60
+      @deadline = @workflow.deadline
       @constant_term = 40
     end
 

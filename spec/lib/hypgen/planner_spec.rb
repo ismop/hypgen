@@ -8,6 +8,7 @@ describe Hypgen::Planner do
     puts workflow_json
     workflow = double("workflow")
     allow(workflow).to receive(:as_json) {workflow_json}
+    allow(workflow).to receive(:deadline) {60}
     allow(workflow).to receive(:external_dependencies) {
       [
         { init_conf_tmp_id: 7, params: { experimentId: @experimentId, dap_token: Hypgen.config.dap_token } },
