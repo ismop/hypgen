@@ -27,7 +27,9 @@ module Hypgen
           :startDate => @start_time,
           :endDate => @end_time,
           :experimentId => @experimentId,
-          :dapToken => Hypgen.config.dap_token
+          :dapToken => Hypgen.config.dap_token,
+          :dapLocation => Hypgen.config.dap_url,
+          :namespace => Hypgen.config.namespace
       }
     end
 
@@ -68,7 +70,7 @@ module Hypgen
 
     def find_dependencies
       [
-        { configuration_template_id: Hypgen.config.config_template_id, params: { experiment_id: @experimentId, dap_token: Hypgen.config.dap_token, rabbitmq_location: @rabbitmq_location } },
+        { configuration_template_id: Hypgen.config.config_template_id, params: { experiment_id: @experimentId, dap_token: Hypgen.config.dap_token, rabbitmq_location: @rabbitmq_location, namespace: Hypgen.config.namespace } },
       ]
     end
   end
