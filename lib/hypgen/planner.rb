@@ -1,5 +1,7 @@
 require 'json'
 require 'recursive-open-struct'
+require 'rgl/adjacency'
+require 'rgl/dot'
 
 module Hypgen
   class Planner
@@ -22,12 +24,23 @@ module Hypgen
       3
     end
 
+    def create_dag(wf)
+      dag = RGL::DirectedAdjacencyGraph.new
+      wf.processes.each do|p|
+        p.outs.each do |o|
+          child = wf.processes.find{ |c| c.ins.include? o}
+          puts "#{p.name} --[#{o}]--> #{child.name}"
+          dag.add_edge(p.name, child.name)
+        end
+      end
+      #dag.write_to_graphic_file('png')
+    end
+
     def count_processes(wf)
       wf.processes.count{ |p| p.name.start_with?("ComputeScenarioRanks") }
     end
 
     def setup
-      # TODO MM: Real planning algorithm
 
       wf_hash = JSON.parse(@workflow.as_json)
       wf = RecursiveOpenStruct.new(wf_hash,:recurse_over_arrays => true)
@@ -42,6 +55,8 @@ module Hypgen
       end
 
       #puts vms
+
+      create_dag(wf)
 
       @workflow.external_dependencies.map do |appl|
         {
