@@ -6,8 +6,8 @@ module Hypgen
       sidekiq_options queue: :experiment
       sidekiq_options :retry => false
 
-      def perform(exp_id, profile_ids, rabbitmq_location, start_time, end_time)
-        workflow = Workflow.new(exp_id, profile_ids, rabbitmq_location, start_time, end_time)
+      def perform(exp_id, profile_ids, rabbitmq_location, start_time, end_time, deadline)
+        workflow = Workflow.new(exp_id, profile_ids, rabbitmq_location, start_time, end_time, deadline)
         setup    = Planner.new(workflow).setup
         set_id   = Hypgen.exp.start_as(setup, importance_level: 45)
 
