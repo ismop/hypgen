@@ -14,6 +14,7 @@ module Hypgen
               requires :profile_ids, type: Array
               requires :start_date, type: Time
               requires :end_date, type: Time
+              optional :deadline, type: Integer, default: 500
             end
           end
           post do
@@ -21,7 +22,8 @@ module Hypgen
               params[:experiment][:name],
               params[:experiment][:profile_ids],
               params[:experiment][:start_date],
-              params[:experiment][:end_date])
+              params[:experiment][:end_date],
+              params[:experiment][:deadline])
 
             exp.start!
 
