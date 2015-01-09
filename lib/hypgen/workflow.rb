@@ -27,9 +27,9 @@ module Hypgen
           :startDate => @start_time,
           :endDate => @end_time,
           :experimentId => @experimentId,
-          :dapToken => Hypgen.config.dap_token,
-          :dapLocation => Hypgen.config.dap_url,
-          :namespace => Hypgen.config.namespace
+          :dapToken => config.dap_token,
+          :dapLocation => config.dap_url,
+          :namespace => config.namespace
       }
     end
 
@@ -45,7 +45,7 @@ module Hypgen
 
     def run!
       puts "3. starting generated workflow"
-      exec_string = Hypgen.config.node_location + " " + Hypgen.config.hyperflow_script_location
+      exec_string = node_exec(config.hyperflow_script_location)
       puts "calling: #{exec_string} with generated workflow"
       IO.popen(exec_string, 'r+') do |pipe|
         pipe.puts(as_json_with_set_id)
@@ -59,7 +59,7 @@ module Hypgen
     private
 
     def generate_workflow
-      exec_string = Hypgen.config.node_location + " " + Hypgen.config.wfgen_script_location
+      exec_string = node_exec(config.wfgen_script_location)
       puts "calling: #{exec_string} with params: #{params.to_json}"
       IO.popen(exec_string, 'r+') do |pipe|
         pipe.puts(params.to_json)
@@ -68,10 +68,18 @@ module Hypgen
       end
     end
 
+    def node_exec(script)
+      "#{config.node_location} #{script}"
+    end
+
     def find_dependencies
       [
-        { configuration_template_id: Hypgen.config.config_template_id, params: { experiment_id: @experimentId, dap_token: Hypgen.config.dap_token, rabbitmq_location: @rabbitmq_location, namespace: Hypgen.config.namespace } },
+        { configuration_template_id: config.config_template_id, params: { experiment_id: @experimentId, dap_token: config.dap_token, rabbitmq_location: @rabbitmq_location, namespace: config.namespace } },
       ]
+    end
+
+    def config
+      Hypgen.config
     end
   end
 end
