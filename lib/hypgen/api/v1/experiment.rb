@@ -28,7 +28,7 @@ module Hypgen
             status 201
             {
               meta: {
-                url: "https://dap.moc.ismop.edu.pl/api/v1/experiments/#{exp.id}"
+                url: "#{Hypgen.config.dap_url}/api/v1/experiments/#{exp.id}"
               },
               experiment: {
                 id: exp.id
