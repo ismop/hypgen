@@ -23,13 +23,13 @@ module Hypgen
 
     def params
       @params ||= {
-          :sections => @profile_ids.collect { |section_id| { :id => section_id.to_s } },
-          :startDate => @start_time,
-          :endDate => @end_time,
-          :experimentId => @experimentId,
-          :dapToken => Hypgen.config.dap_token,
-          :dapLocation => Hypgen.config.dap_url,
-          :namespace => Hypgen.config.namespace
+        sections: sections,
+        startDate: @start_time,
+        endDate: @end_time,
+        experimentId: @experimentId,
+        dapToken: Hypgen.config.dap_token,
+        dapLocation: Hypgen.config.dap_url,
+        namespace: Hypgen.config.namespace
       }
     end
 
@@ -58,6 +58,10 @@ module Hypgen
 
     private
 
+    def sections
+      @profile_ids.map { |section_id| { id: section_id.to_s } }
+    end
+
     def generate_workflow
       exec_string = Hypgen.config.node_location + " " + Hypgen.config.wfgen_script_location
       puts "calling: #{exec_string} with params: #{params.to_json}"
@@ -70,7 +74,15 @@ module Hypgen
 
     def find_dependencies
       [
-        { configuration_template_id: Hypgen.config.config_template_id, params: { experiment_id: @experimentId, dap_token: Hypgen.config.dap_token, rabbitmq_location: @rabbitmq_location, namespace: Hypgen.config.namespace } },
+        {
+          configuration_template_id: Hypgen.config.config_template_id,
+          params: {
+            experiment_id: @experimentId,
+            dap_token: Hypgen.config.dap_token,
+            rabbitmq_location: @rabbitmq_location,
+            namespace: Hypgen.config.namespace
+          }
+        }
       ]
     end
   end
