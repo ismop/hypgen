@@ -36,6 +36,7 @@ module Hypgen
   autoload :Experiment,     'hypgen/experiment'
   autoload :Workflow,       'hypgen/workflow'
   autoload :Planner,        'hypgen/planner'
+  autoload :Auditable,      'hypgen/auditable'
 end
 
 module Dap

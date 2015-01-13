@@ -21,3 +21,4 @@ tmp
 mkmf.log
 config.yml
 .idea/
+experiments.log
