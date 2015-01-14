@@ -35,6 +35,12 @@ To start only web frontend type:
 export HFLOW_PATH=/path/to/hyperflow/
 ```
 
+To connect to non standard amqp set following env variable:
+
+```
+export AMQP_URL=amqp://IP:PORT
+```
+
 ```
 foreman start web
 # or
