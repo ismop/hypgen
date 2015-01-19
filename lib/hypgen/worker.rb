@@ -3,6 +3,7 @@ require 'sidekiq'
 module Hypgen
   module Worker
     autoload :ExperimentRun, 'hypgen/worker/experiment_run'
+    autoload :Runner,        'hypgen/worker/runner'
   end
 end
 

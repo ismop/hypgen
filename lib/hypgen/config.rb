@@ -66,13 +66,26 @@ module Hypgen
       @config['worker']['redis_url'] || 'redis://localhost:6379'
     end
 
+    def log_dir
+      @config['logs']['dir'] || '.'
+    end
+
+    def trace?
+      @config['logs']['trace']
+    end
+
     private
 
     def load_config(config_path)
       if File.exists?(config_path)
         @config = YAML.load_file(config_path)
       else
-        @config = { 'exp' => {}, 'dap' => {}, 'worker' => {}}
+        @config = {
+          'exp' => {},
+          'dap' => {},
+          'worker' => {},
+          'logs' => {}
+        }
       end
     end
   end

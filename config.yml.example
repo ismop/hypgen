@@ -7,6 +7,10 @@ worker_config_template_id: FIXME
 
 rabbitmq_location: FIXME
 
+logs:
+  dir: FIXME (logs directory)
+  trace: true/false (if true than for every experiment run dedicated file will be created)
+
 wfgen:
   script_location: FIXME (wfgen script location) https://gitlab.dev.cyfronet.pl/ismop/wfgen
 
