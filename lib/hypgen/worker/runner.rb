@@ -24,9 +24,9 @@ module Hypgen
 
           return_code = audit('Running workflow') { workflow.run! }
           if return_code == 0
-            Hypgen.dap.update_exp(id, status: :finished)
+            dap_client.update_exp(id, status: :finished)
           else
-            Hypgen.dap.update_exp(id,
+            dap_client.update_exp(id,
                                   status: :error,
                                   status_message: 'Non zero return code!')
           end
@@ -84,6 +84,10 @@ module Hypgen
 
       def exp_client
         options[:exp_client] || Hypgen.exp
+      end
+
+      def dap_client
+        options[:dap_client] || Hypgen.dap
       end
     end
   end
