@@ -22,7 +22,13 @@ module Hypgen
           set_id = start_as(setup)
           workflow.set_set_id(set_id)
 
-          audit('Running workflow') { workflow.run! }
+          return_code = audit('Running workflow') { workflow.run! }
+
+          if return_code == 0
+            dap_client.update_exp(id, status: :finished)
+          else
+            fail StandardError, 'Non zero workflow return code!'
+          end
         end
       rescue StandardError => e
         logger.error("Experiment finished with error #{e}\n #{e.backtrace}")
@@ -77,6 +83,10 @@ module Hypgen
 
       def exp_client
         options[:exp_client] || Hypgen.exp
+      end
+
+      def dap_client
+        options[:dap_client] || Hypgen.dap
       end
     end
   end
