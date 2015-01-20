@@ -26,7 +26,8 @@ module Hypgen
           if return_code == 0
             Hypgen.dap.update_exp(id, status: :finished)
           else
-            Hypgen.dap.update_exp(id, status: :error, status_message: "Non zero return code!")
+            Hypgen.dap.update_exp(id, status: :error,
+                                  status_message: "Non zero return code!")
           end
         end
       rescue StandardError => e
