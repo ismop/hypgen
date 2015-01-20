@@ -53,6 +53,8 @@ module Hypgen
         output = pipe.read
 
         puts "Workflow execution output: #{output}"
+        pipe.close
+        $?.to_i
       end
     end
 
