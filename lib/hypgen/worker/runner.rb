@@ -23,12 +23,11 @@ module Hypgen
           workflow.set_set_id(set_id)
 
           return_code = audit('Running workflow') { workflow.run! }
+
           if return_code == 0
             dap_client.update_exp(id, status: :finished)
           else
-            dap_client.update_exp(id,
-                                  status: :error,
-                                  status_message: 'Non zero return code!')
+            fail StandardError, 'Non zero workflow return code!'
           end
         end
       rescue StandardError => e
