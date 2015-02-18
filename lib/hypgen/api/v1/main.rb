@@ -17,7 +17,7 @@ module Hypgen
           end
         end
 
-        mount Hypgen::Api::V1::Experiment => '/api'
+        mount Hypgen::Api::V1::ThreatAssessments => '/api'
       end
     end
   end

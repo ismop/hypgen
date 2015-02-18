@@ -1,15 +1,15 @@
 module Hypgen
   module Api
     module V1
-      class Experiment < Grape::API
+      class ThreatAssessments < Grape::API
 
-        resource :experiments do
+        resource :threat_assessments do
           get do
-            { help: 'REST interface for starting ISMOP experiment'}
+            { help: 'REST interface for starting ISMOP threat assessment'}
           end
 
           params do
-            requires :experiment, type: Hash  do
+            requires :threat_assessment, type: Hash  do
               requires :name, type: String
               requires :profile_ids, type: Array
               requires :start_date, type: Time
@@ -19,20 +19,20 @@ module Hypgen
           end
           post do
             exp = Hypgen::Experiment.new(
-              params[:experiment][:name],
-              params[:experiment][:profile_ids],
-              params[:experiment][:start_date],
-              params[:experiment][:end_date],
-              params[:experiment][:deadline])
+              params[:threat_assessment][:name],
+              params[:threat_assessment][:profile_ids],
+              params[:threat_assessment][:start_date],
+              params[:threat_assessment][:end_date],
+              params[:threat_assessment][:deadline])
 
             exp.start!
 
             status 201
             {
               meta: {
-                url: "#{Hypgen.config.dap_url}/api/v1/experiments/#{exp.id}"
+                url: "#{Hypgen.config.dap_url}/api/v1/threat_assessments/#{exp.id}"
               },
-              experiment: {
+              threat_assessment: {
                 id: exp.id
               }
             }
