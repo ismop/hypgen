@@ -48,11 +48,11 @@
 
 <body onload="insertHostname()">
   <h1>Hypgen</h1>
-  <h3>To start new ISMOP experiment execute following command</h3>
+  <h3>To start new ISMOP threat assessment execute following command</h3>
   <hr/>
   <pre>
 curl -k -H "Content-Type: application/json" \
--d '{"experiment":{"name": "exp name", "profile_ids":[1,2], "start_date": "2014-11-21T09:45:42.025Z", "end_date": "2014-11-22T09:45:42.025Z"}}' \
+-d '{"threat_assessment":{"name": "exp name", "profile_ids":[1,2], "start_date": "2014-11-21T09:45:42.025Z", "end_date": "2014-11-22T09:45:42.025Z"}}' \
 -u username:password http://<span id="hostname">hypgen.moc.ismop.edu.pl</span>/api/threat_assessments
   </pre>
 </body>
