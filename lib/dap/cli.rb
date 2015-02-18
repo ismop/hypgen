@@ -5,18 +5,18 @@ module Dap
   class Cli
     include RestCli
 
-    def create_exp(name, profile_ids, start_time, end_time)
-      puts "1. creating new experiment for #{profile_ids} profiles with period #{start_time} - #{end_time}"
+    def create_exp(name, section_ids, start_time, end_time)
+      puts "1. creating new experiment for #{section_ids} profiles with period #{start_time} - #{end_time}"
 
       response = connection.post do |req|
-        req.url '/api/v1/experiments'
+        req.url '/api/v1/threat_assessments'
         req.headers['Content-Type'] = 'application/json'
         req.body = {
-          experiment: {
+          threat_assessment: {
             name: name,
             start_date: start_time,
             end_date: end_time,
-            profile_ids: profile_ids,
+            section_ids: section_ids,
             status: :started
           }
         }.to_json
@@ -24,16 +24,16 @@ module Dap
 
       raise(ExpCreationError, response.body) unless response.status == 201
 
-      JSON.parse(response.body)['experiment']['id']
+      JSON.parse(response.body)['threat_assessment']['id']
     end
 
     def update_exp(exp_id, updated_fields)
       puts "Updating #{exp_id} experiment with following fields #{updated_fields}"
 
       response = connection.put do |req|
-        req.url "/api/v1/experiments/#{exp_id}"
+        req.url "/api/v1/threat_assessments/#{exp_id}"
         req.headers['Content-Type'] = 'application/json'
-        req.body = { experiment: updated_fields }.to_json
+        req.body = { threat_assessment: updated_fields }.to_json
       end
 
       raise(ExpUpdateError, response.body) unless response.status == 200

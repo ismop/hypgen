@@ -26,8 +26,8 @@ module Hypgen
 
   module Api
     module V1
-      autoload :Main,       'hypgen/api/v1/main'
-      autoload :Experiment, 'hypgen/api/v1/experiment'
+      autoload :Main,              'hypgen/api/v1/main'
+      autoload :ThreatAssessments, 'hypgen/api/v1/threat_assessments'
     end
   end
 
