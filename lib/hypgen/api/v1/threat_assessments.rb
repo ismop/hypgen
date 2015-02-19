@@ -11,7 +11,7 @@ module Hypgen
           params do
             requires :threat_assessment, type: Hash  do
               requires :name, type: String
-              requires :profile_ids, type: Array
+              requires :section_ids, type: Array
               requires :start_date, type: Time
               requires :end_date, type: Time
               optional :deadline, type: Integer, default: 500
@@ -20,7 +20,7 @@ module Hypgen
           post do
             exp = Hypgen::Experiment.new(
               params[:threat_assessment][:name],
-              params[:threat_assessment][:profile_ids],
+              params[:threat_assessment][:section_ids],
               params[:threat_assessment][:start_date],
               params[:threat_assessment][:end_date],
               params[:threat_assessment][:deadline])
