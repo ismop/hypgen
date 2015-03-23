@@ -10,16 +10,48 @@ module Hypgen
       @constant_term = 40
     end
 
-    def estimate_task_runtime
-      # return current estimation from the experiments
-      9.345820862
-    end
 
+    # Our performance model
+    # Model Parameters:
+    # T - time in seconds
+    # s - number of sections
+    # d - number of days (window size)
+    # v - number of VMs
+    #
+    # Function parameters obtained from fit to data:
+    # a = 6.53
+    # b = 9.41
+    # c = 31.71
+    #
+    # Function:
+    # T = a * s * d / v + b * v + c
+    #
+    # This can be solved to find v:
+    # b * v^2 + (c-T) * v + a * s * d = 0
+    # This gives:
+    #
+    # v = (-(c-T) +/- sqrt((c-T)^2 -4 * b * a * s *d)) / (2 * b)
+    # Out of two solutions we select the smaller one, so:
+    # v = (-(c-T) - sqrt((c-T)^2 - 4 * b * a * s *d)) / (2 * b)
+    #
     def estimate_vm_count(wf)
-      vmc = count_processes(wf) * estimate_task_runtime / ( @deadline - @constant_term)
+
+      a = 6.53
+      b = 9.41
+      c = 31.71
+
+      s = count_processes(wf)
+      d = 1 # Fixme: how can we get the number of days from the workflow?
+      t = @deadline
+
+      delta = (c-t)*(c-t) - 4 * b * a * s *d
+
+      delta = 0.0 if delta<0
+
+      vmc = (-(c-t) - sqrt(delta)) / (2 * b)
+
       vmc.ceil
-      # FIXME for production let's be safe
-      3
+
     end
 
     def count_processes(wf)
@@ -27,7 +59,6 @@ module Hypgen
     end
 
     def setup
-      # TODO MM: Real planning algorithm
 
       wf_hash = JSON.parse(@workflow.as_json)
       wf = RecursiveOpenStruct.new(wf_hash,:recurse_over_arrays => true)
