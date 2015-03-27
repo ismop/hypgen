@@ -18,7 +18,26 @@ describe Hypgen::Planner do
 
     puts setup[0][:vms]
 
-    expect(setup[0][:vms].count).to eq(3)
+    expect(setup[0][:vms].count).to eq(2)
 
   end
+
+  it 'should compute performance model' do
+
+    workflow = double("workflow")
+    allow(workflow).to receive(:deadline) {60}
+    planner = Hypgen::Planner.new(workflow)
+
+    # test some known examples
+    expect(planner.compute_perf_model(128, 3, 278)).to eq(14)
+    expect(planner.compute_perf_model(256, 1, 292)).to eq(11)
+    expect(planner.compute_perf_model(128, 1, 862)).to eq(2)
+    expect(planner.compute_perf_model(128, 1, 205)).to eq(10)
+    expect(planner.compute_perf_model(1024, 1, 6721)).to eq(2)
+
+    # test that negative vm count is replaced by 1
+    expect(planner.compute_perf_model(128, 278, 3)).to eq(1)
+
+  end
+
 end

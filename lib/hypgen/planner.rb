@@ -7,7 +7,17 @@ module Hypgen
     def initialize(workflow)
       @workflow = workflow
       @deadline = @workflow.deadline
-      @constant_term = 40
+    end
+
+
+    def estimate_vm_count(wf)
+
+      s = count_processes(wf)
+      d = 1 # Fixme: how can we get the number of days from the workflow?
+      t = @deadline
+
+      vm_count = compute_perf_model(s, d, t)
+
     end
 
 
@@ -33,23 +43,16 @@ module Hypgen
     # v = (-(c-T) +/- sqrt((c-T)^2 -4 * b * a * s *d)) / (2 * b)
     # Out of two solutions we select the smaller one, so:
     # v = (-(c-T) - sqrt((c-T)^2 - 4 * b * a * s *d)) / (2 * b)
-    #
-    def estimate_vm_count(wf)
 
+    def compute_perf_model (s, d, t)
       a = 6.53
       b = 9.41
       c = 31.71
 
-      s = count_processes(wf)
-      d = 1 # Fixme: how can we get the number of days from the workflow?
-      t = @deadline
-
       delta = (c-t)*(c-t) - 4 * b * a * s *d
-
       delta = 0.0 if delta<0
-
-      vmc = (-(c-t) - sqrt(delta)) / (2 * b)
-
+      vmc = (-(c-t) - Math.sqrt(delta)) / (2 * b)
+      vmc = 1 if vmc <= 0
       vmc.ceil
 
     end
