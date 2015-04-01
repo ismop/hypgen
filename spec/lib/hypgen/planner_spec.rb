@@ -4,9 +4,9 @@ describe Hypgen::Planner do
   it 'should plan workflow' do
     workflow_json = File.read("spec/lib/hypgen/test_wf.json")
     puts workflow_json
-    workflow = double("workflow")
+    workflow = double('workflow')
     allow(workflow).to receive(:as_json) {workflow_json}
-    allow(workflow).to receive(:deadline) {60}
+    allow(workflow).to receive(:deadline) { 60 }
     allow(workflow).to receive(:external_dependencies) {
       [
         { init_conf_tmp_id: 7, params: { experimentId: @experimentId, dap_token: Hypgen.config.dap_token } },
@@ -14,7 +14,7 @@ describe Hypgen::Planner do
     allow(workflow).to receive(:start_time) { '2014-11-19T09:45:42.025Z' }
     allow(workflow).to receive(:end_time) { '2014-11-20T09:45:42.025Z' }
     planner = Hypgen::Planner.new(workflow)
-    setup     = planner.setup
+    setup = planner.setup
 
     puts setup[0][:vms]
 
@@ -22,8 +22,8 @@ describe Hypgen::Planner do
   end
 
   it 'should read start and end time from workflow' do
-    workflow = double("workflow")
-    allow(workflow).to receive(:deadline) {60}
+    workflow = double('workflow')
+    allow(workflow).to receive(:deadline) { 60 }
 
     allow(workflow).to receive(:start_time) { '2014-11-19T09:45:42.025Z' }
     allow(workflow).to receive(:end_time) { '2014-11-20T09:45:42.025Z' }
@@ -42,8 +42,8 @@ describe Hypgen::Planner do
   end
 
   it 'should compute performance model' do
-    workflow = double("workflow")
-    allow(workflow).to receive(:deadline) {60}
+    workflow = double('workflow')
+    allow(workflow).to receive(:deadline) { 60 }
 
     # these values are not used in the test
     allow(workflow).to receive(:start_time) { '2014-11-19T09:45:42.025Z' }
