@@ -3,7 +3,6 @@ require 'spec_helper'
 describe Hypgen::Planner do
 
   it 'should plan workflow' do
-
     workflow_json = File.read("spec/lib/hypgen/test_wf.json")
     puts workflow_json
     workflow = double("workflow")
@@ -21,12 +20,9 @@ describe Hypgen::Planner do
     puts setup[0][:vms]
 
     expect(setup[0][:vms].count).to eq(2)
-
   end
 
-
   it 'should read start and end time from workflow' do
-
     workflow = double("workflow")
     allow(workflow).to receive(:deadline) {60}
 
@@ -44,11 +40,9 @@ describe Hypgen::Planner do
     allow(workflow).to receive(:end_time) {"2014-11-20T09:45:42.025Z"}
     planner = Hypgen::Planner.new(workflow)
     expect(planner.days).to eq(1)
-
   end
 
-    it 'should compute performance model' do
-
+  it 'should compute performance model' do
     workflow = double("workflow")
     allow(workflow).to receive(:deadline) {60}
 
@@ -66,7 +60,6 @@ describe Hypgen::Planner do
 
     # test that negative vm count is replaced by 1
     expect(planner.compute_perf_model(128, 278, 3)).to eq(1)
-
   end
 
 end

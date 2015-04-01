@@ -22,8 +22,7 @@ module Hypgen
       d = @days
       t = @deadline
 
-      vm_count = compute_perf_model(s, d, t)
-      return vm_count
+      compute_perf_model(s, d, t)
     end
 
     # Our performance model
