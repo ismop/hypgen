@@ -1,19 +1,27 @@
 require 'json'
 require 'recursive-open-struct'
+require 'date'
 
 module Hypgen
   class Planner
 
+    # number of days in time window, rounded down to the full days
+    attr_reader :days
+
     def initialize(workflow)
       @workflow = workflow
       @deadline = @workflow.deadline
+      start_date = DateTime.parse(@workflow.start_time)
+      end_date = DateTime.parse(@workflow.end_time)
+      @days = (end_date-start_date).to_i
+      @days = 1 if days <= 0
     end
 
 
     def estimate_vm_count(wf)
 
       s = count_processes(wf)
-      d = 1 # Fixme: how can we get the number of days from the workflow?
+      d = @days
       t = @deadline
 
       vm_count = compute_perf_model(s, d, t)
@@ -23,7 +31,7 @@ module Hypgen
 
     # Our performance model
     # Model Parameters:
-    # T - time in seconds
+    # T - time (deadline) in seconds
     # s - number of sections
     # d - number of days (window size)
     # v - number of VMs
