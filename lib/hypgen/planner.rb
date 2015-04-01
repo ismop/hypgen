@@ -13,21 +13,18 @@ module Hypgen
       @deadline = @workflow.deadline
       start_date = DateTime.parse(@workflow.start_time)
       end_date = DateTime.parse(@workflow.end_time)
-      @days = (end_date-start_date).to_i
+      @days = (end_date - start_date).to_i
       @days = 1 if days <= 0
     end
 
-
     def estimate_vm_count(wf)
-
       s = count_processes(wf)
       d = @days
       t = @deadline
 
       vm_count = compute_perf_model(s, d, t)
-
+      return vm_count
     end
-
 
     # Our performance model
     # Model Parameters:
@@ -52,17 +49,16 @@ module Hypgen
     # Out of two solutions we select the smaller one, so:
     # v = (-(c-T) - sqrt((c-T)^2 - 4 * b * a * s *d)) / (2 * b)
 
-    def compute_perf_model (s, d, t)
+    def compute_perf_model(s, d, t)
       a = 6.53
       b = 9.41
       c = 31.71
 
-      delta = (c-t)*(c-t) - 4 * b * a * s *d
-      delta = 0.0 if delta<0
-      vmc = (-(c-t) - Math.sqrt(delta)) / (2 * b)
+      delta = (c - t) * (c - t) - 4 * b * a * s * d
+      delta = 0.0 if delta < 0
+      vmc = (-(c - t) - Math.sqrt(delta)) / (2 * b)
       vmc = 1 if vmc <= 0
       vmc.ceil
-
     end
 
     def count_processes(wf)
