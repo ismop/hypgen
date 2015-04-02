@@ -1,6 +1,7 @@
 require 'json'
 require 'recursive-open-struct'
 require 'rgl/adjacency'
+require 'rgl/topsort'
 require 'rgl/dot'
 
 module Hypgen
@@ -33,15 +34,31 @@ module Hypgen
           dag.add_edge(p.name, child.name)
         end
       end
-      #dag.write_to_graphic_file('png')
+      dag.write_to_graphic_file('png')
+      dag
     end
 
     def count_processes(wf)
       wf.processes.count{ |p| p.name.start_with?("ComputeScenarioRanks") }
     end
 
-    def setup
+    def compute_levels
+      # compute levels of the DAG
+      wf_hash = JSON.parse(@workflow.as_json)
+      wf = RecursiveOpenStruct.new(wf_hash,:recurse_over_arrays => true)
+      dag = create_dag(wf)
+      level = Hash.new
+      dag.topsort_iterator.each{ |v| level[v]=0 }
+      dag.topsort_iterator.each{ |v|
+        dag.adjacent_vertices(v).each{ |c|
+          level[c] = level[v] + 1 if level[c] <= level[v]
+        }
+      }
+      dag.topsort_iterator.each{ |v| puts "#{v}: level #{level[v]}" }
+      level
+    end
 
+    def setup
       wf_hash = JSON.parse(@workflow.as_json)
       wf = RecursiveOpenStruct.new(wf_hash,:recurse_over_arrays => true)
 
@@ -54,9 +71,8 @@ module Hypgen
         vms.push ( { cpu: 1, mem: 512 })
       end
 
+      compute_levels
       #puts vms
-
-      create_dag(wf)
 
       @workflow.external_dependencies.map do |appl|
         {
