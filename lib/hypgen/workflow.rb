@@ -31,7 +31,10 @@ module Hypgen
         experimentId: @experimentId,
         dapToken: config.dap_token,
         dapLocation: config.dap_url,
-        namespace: config.namespace
+        namespace: config.namespace,
+        contextId: nil,
+        scenarioId: nil,
+        executable: "comparing.bin"
       }
     end
 
