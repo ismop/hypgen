@@ -3,10 +3,10 @@ module Hypgen
     class Runner
       include Hypgen::Auditable
 
-      def initialize(id, profile_ids, rabbitmq_location,
+      def initialize(id, profile_mappings, rabbitmq_location,
                      start_time, end_time, deadline, options = {})
         @id = id
-        @profile_ids = profile_ids
+        @profile_mappings = profile_mappings
         @rabbitmq_location = rabbitmq_location
         @start_time = start_time
         @end_time = end_time
@@ -41,14 +41,14 @@ module Hypgen
 
       private
 
-      attr_reader :id, :profile_ids,
+      attr_reader :id, :profile_mappings,
                   :rabbitmq_location,
                   :start_time, :end_time,
                   :deadline, :options
 
       def generate_workflow
         audit('Generating workflow') do
-          workflow_class.new(id, profile_ids,
+          workflow_class.new(id, profile_mappings,
                              rabbitmq_location,
                              start_time, end_time,
                              deadline)

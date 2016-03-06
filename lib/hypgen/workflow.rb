@@ -6,9 +6,9 @@ module Hypgen
     attr_accessor :start_time
     attr_accessor :end_timed
 
-    def initialize(experiment_id, profile_ids, rabbitmq_location, start_time, end_time, deadline)
+    def initialize(experiment_id, profile_mappings, rabbitmq_location, start_time, end_time, deadline)
       @experimentId = experiment_id
-      @profile_ids = profile_ids
+      @profile_mappings = profile_mappings
       @start_time = start_time
       @end_time = end_time
       @rabbitmq_location = rabbitmq_location
@@ -25,7 +25,7 @@ module Hypgen
 
     def params
       @params ||= {
-        sections: sections,
+        profile_mappings: @profile_mappings,
         startDate: @start_time,
         endDate: @end_time,
         experimentId: @experimentId,
@@ -65,6 +65,7 @@ module Hypgen
 
     private
 
+    #TODO: unused
     def sections
       @profile_ids.map { |section_id| { id: section_id.to_s } }
     end
