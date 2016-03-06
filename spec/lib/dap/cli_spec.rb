@@ -24,7 +24,7 @@ describe Dap::Cli do
       [201, {}, '{"threat_assessment":{"id": 123}}']
     end
 
-    expect(subject.create_exp('exp', [1, 2, 3], 'start_d', 'end_d')).to eq 123
+    expect(subject.create_threat_assessment_run('exp', [1, 2, 3], 'start_d', 'end_d')).to eq 123
   end
 
   it 'throws exception when unable to create experiment' do
@@ -32,7 +32,7 @@ describe Dap::Cli do
       [400, {}, '{"message": "appliance init conf not found"}']
     end
 
-    expect { subject.create_exp('exp', [1] ,'s', 'e') }.to raise_error(Dap::ExpCreationError)
+    expect { subject.create_threat_assessment_run('exp', [1] , 's', 'e') }.to raise_error(Dap::ThreatAssessmentRunCreationError)
   end
 
   it 'updates experiment fields' do
@@ -45,7 +45,7 @@ describe Dap::Cli do
       [200, {}, '']
     end
 
-    subject.update_exp(123, { status: :error, status_message: 'error msg' })
+    subject.update_threat_assessment_run(123, {status: :error, status_message: 'error msg' })
   end
 
   it 'failed to update experiment' do
@@ -53,6 +53,6 @@ describe Dap::Cli do
       [400, {}, '{"message": "err"}']
     end
 
-    expect { subject.update_exp(123 ,{}) }.to raise_error(Dap::ExpUpdateError)
+    expect { subject.update_threat_assessment_run(123 , {}) }.to raise_error(Dap::ThreatAssessmentRunUpdateError)
   end
 end

@@ -25,7 +25,7 @@ module Hypgen
           return_code = audit('Running workflow') { workflow.run! }
 
           if return_code == 0
-            dap_client.update_exp(id, status: :finished)
+            dap_client.update_threat_assessment_run(id, status: :finished)
           else
             fail StandardError, 'Non zero workflow return code!'
           end
@@ -34,7 +34,7 @@ module Hypgen
         logger.error("Experiment finished with error #{e}\n #{e.backtrace}")
 
         Hypgen.dap.
-          update_exp(id, status: :error, status_message: e.message)
+          update_threat_assessment_run(id, status: :error, status_message: e.message)
       ensure
         stop_as(set_id) if set_id
       end

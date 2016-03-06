@@ -5,7 +5,7 @@ module Dap
   class Cli
     include RestCli
 
-    def create_exp(name, section_ids, start_time, end_time)
+    def create_threat_assessment_run(name, section_ids, start_time, end_time)
       puts "1. creating new experiment for #{section_ids} profiles with period #{start_time} - #{end_time}"
 
       response = connection.post do |req|
@@ -22,12 +22,12 @@ module Dap
         }.to_json
       end
 
-      raise(ExpCreationError, response.body) unless response.status == 201
+      raise(ThreatAssessmentRunCreationError, response.body) unless response.status == 201
 
       JSON.parse(response.body)['threat_assessment']['id']
     end
 
-    def update_exp(exp_id, updated_fields)
+    def update_threat_assessment_run(exp_id, updated_fields)
       puts "Updating #{exp_id} experiment with following fields #{updated_fields}"
 
       response = connection.put do |req|
@@ -36,13 +36,13 @@ module Dap
         req.body = { threat_assessment: updated_fields }.to_json
       end
 
-      raise(ExpUpdateError, response.body) unless response.status == 200
+      raise(ThreatAssessmentRunUpdateError, response.body) unless response.status == 200
     end
   end
 
-  class ExpCreationError < Exception
+  class ThreatAssessmentRunCreationError < Exception
   end
 
-  class ExpUpdateError < Exception
+  class ThreatAssessmentRunUpdateError < Exception
   end
 end

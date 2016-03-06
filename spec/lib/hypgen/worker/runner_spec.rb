@@ -41,7 +41,7 @@ describe Hypgen::Worker::Runner do
       and_return(0)
 
     expect(dap_client).
-      to receive(:update_exp).
+      to receive(:update_threat_assessment_run).
       with(1, status: :finished)
 
     expect(exp_client).

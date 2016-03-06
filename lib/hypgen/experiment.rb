@@ -11,7 +11,7 @@ module Hypgen
     end
 
     def start!
-      @id = Hypgen.dap.create_exp(
+      @id = Hypgen.dap.create_threat_assessment_run(
         @name, @profile_ids, @start_time, @end_time)
 
       Hypgen::Worker::ExperimentRun
