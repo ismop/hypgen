@@ -9,10 +9,10 @@ module Dap
       puts "1. creating new threat assessment run for #{section_ids} profiles with period #{start_time} - #{end_time}"
 
       response = connection.post do |req|
-        req.url '/api/v1/threat_assessments'
+        req.url '/api/v1/threat_assessment_runs'
         req.headers['Content-Type'] = 'application/json'
         req.body = {
-          threat_assessment: {
+          threat_assessment_run: {
             name: name,
             start_date: start_time,
             end_date: end_time,
@@ -23,16 +23,16 @@ module Dap
 
       raise(ThreatAssessmentRunCreationError, response.body) unless response.status == 201
 
-      JSON.parse(response.body)['threat_assessment']['id']
+      JSON.parse(response.body)['threat_assessment_run']['id']
     end
 
     def update_threat_assessment_run(tar_id, updated_fields)
       puts "Updating #{tar_id} threat assessment run with following fields #{updated_fields}"
 
       response = connection.put do |req|
-        req.url "/api/v1/threat_assessments/#{tar_id}"
+        req.url "/api/v1/threat_assessment_runs/#{tar_id}"
         req.headers['Content-Type'] = 'application/json'
-        req.body = { threat_assessment: updated_fields }.to_json
+        req.body = { threat_assessment_run: updated_fields }.to_json
       end
 
       raise(ThreatAssessmentRunUpdateError, response.body) unless response.status == 200
