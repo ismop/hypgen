@@ -14,7 +14,7 @@ module Hypgen
       @id = Hypgen.dap.create_threat_assessment_run(
         @name, @profile_ids, @start_time, @end_time)
 
-      profile_mappings = @profile_ids.each do |profile_id|
+      profile_mappings = @profile_ids.collect do |profile_id|
         [profile_id, Hypgen.dap.create_threat_assessment(@id, @profile_ids)]
       end
 
