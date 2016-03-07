@@ -30,7 +30,7 @@ module Hypgen
             status 201
             {
               meta: {
-                url: "#{Hypgen.config.dap_url}/api/v1/threat_assessments/#{exp.id}"
+                url: "#{Hypgen.config.dap_url}/api/v1/threat_assessment_runs/#{exp.id}"
               },
               threat_assessment: {
                 id: exp.id
