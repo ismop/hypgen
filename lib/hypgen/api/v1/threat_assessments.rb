@@ -32,7 +32,7 @@ module Hypgen
               meta: {
                 url: "#{Hypgen.config.dap_url}/api/v1/threat_assessment_runs/#{exp.id}"
               },
-              threat_assessment: {
+              threat_assessment_run: {
                 id: exp.id
               }
             }
