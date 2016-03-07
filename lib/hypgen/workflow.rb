@@ -4,7 +4,7 @@ module Hypgen
   class Workflow
     attr_accessor :deadline
     attr_accessor :start_time
-    attr_accessor :end_timed
+    attr_accessor :end_time
 
     def initialize(experiment_id, profile_mappings, rabbitmq_location, start_time, end_time, deadline)
       @experimentId = experiment_id
